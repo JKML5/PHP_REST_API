@@ -1,11 +1,13 @@
 <?php
 
-namespace Application\Controller;
+namespace App\Controller;
 
-use Application\Model\Editor\Editor;
+use App\Model\Editor\Editor;
+use App\lib\Route;
 
 require_once('src/lib/DatabaseConnection.php');
 require_once('src/Models/Editor.php');
+require_once('src/lib/Route.php');
 
 class EditorController
 {
@@ -16,18 +18,21 @@ class EditorController
     $this->editor = new Editor();
   }
 
+  #[Route('/editors', 'GET')]
   public function getEditors()
   {
     $editors = $this->editor->getEditors();
     return $this->sendResponse(['error' => false, 'editors' => $editors, 'message' => 'ok']);
   }
 
+  #[Route('/editors/{id:\d+}', 'GET')]
   public function getEditor(int $id)
   {
     $editor = $this->editor->getEditor($id);
     return $this->sendResponse(['error' => false, 'editor' => $editor, 'message' => 'ok']);
   }
 
+  #[Route('/editors/add', 'POST')]
   public function addEditor(string $name)
   {
     $editorId = $this->editor->addEditor($name);
@@ -37,6 +42,7 @@ class EditorController
     return $this->sendResponse(['error' => false, 'message' => 'Éditeur ajouté avec succès.', 'editor_id' => $editorId]);
   }
 
+  #[Route('/editors/update/{id:\d+}', 'PUT')]
   public function updateEditor(int $id, string $name)
   {
     $affectedRows = $this->editor->updateEditor($id, $name);

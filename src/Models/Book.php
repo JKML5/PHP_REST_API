@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Model\Book;
+namespace App\Model\Book;
 
 use \DatabaseConnection;
 

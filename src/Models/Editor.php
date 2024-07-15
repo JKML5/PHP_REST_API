@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Model\Editor;
+namespace App\Model\Editor;
 
 use \DatabaseConnection;
 
